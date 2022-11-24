@@ -1,4 +1,3 @@
-// imc = peso / altura * altura
 
 const pacientes = document.querySelectorAll(".paciente")
 
@@ -17,7 +16,6 @@ for(let i = 0; i < pacientes.length; i++){
     
     const pesoEhValido = peso <= 600 && peso > 0;
     const alturaEhValida = altura <= 3.50 && altura > 0;
-
 
     
     if(!pesoEhValido && !alturaEhValida){
@@ -44,11 +42,3 @@ function calculaImc(peso, altura){
     
     return resultado.toFixed(2);
 }
-
-
-
-
- 
-
-
-

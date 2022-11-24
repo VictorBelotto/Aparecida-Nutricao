@@ -51,3 +51,4 @@ function montaTd(dado, classe){
     return td;
 }
 
+//fazer uma validação de acordo com altura e peso

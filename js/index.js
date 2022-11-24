@@ -1,5 +1,5 @@
 
-const pacientes = document.querySelectorAll(".paciente")
+let pacientes = document.querySelectorAll(".paciente")
 
 
 for(let i = 0; i < pacientes.length; i++){

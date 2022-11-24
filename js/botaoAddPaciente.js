@@ -6,14 +6,21 @@ let buscaPaciente = document.querySelector("#form-adiciona");
 botaoAddPaciente.addEventListener("click", (event) => {event.preventDefault();
 
     let paciente = obtemPacienteDoFormulario(buscaPaciente)
-
+    verificaSeFormularioEhValido(paciente)
     let pacienteTr = montaTr(paciente)
 
+
+  
+    
     let tabela = document.querySelector("#tabela-pacientes");
 
     tabela.appendChild(pacienteTr)
-
+    pacientes = document.querySelectorAll(".paciente")
+console.log(pacientes)
     buscaPaciente.reset();
+
+    
+    
     
 })
 
@@ -24,7 +31,7 @@ function obtemPacienteDoFormulario(buscaPaciente){
         peso:buscaPaciente.peso.value,
         altura:buscaPaciente.altura.value,
         gordura:buscaPaciente.gordura.value,
-        imc: calculaImc(buscaPaciente.peso.value, buscaPaciente.altura.value)
+        imc: 0 //calculaImc(buscaPaciente.peso.value, buscaPaciente.altura.value)
     }
     return paciente
 }
@@ -52,3 +59,30 @@ function montaTd(dado, classe){
 }
 
 //fazer uma validação de acordo com altura e peso
+
+function verificaSeFormularioEhValido(paciente){
+
+   /*  let nome = paciente.nome
+    let peso = paciente.peso
+    let altura = paciente.altura
+    let gordura = paciente.gordura */
+
+    //let = valoresDigitados = [nome, peso, altura, gordura];
+
+    /* console.log(paciente) */
+
+    let verificaCamposPreenchidos = (nome && peso && altura && gordura) != "";
+
+   console.log(verificaCamposPreenchidos)
+
+    for(let valoresDigitados in paciente ){
+        const valores = valoresDigitados
+        
+        console.log(`O valor digitado é: ${valores}`)
+    }
+
+
+    return 
+
+    }
+

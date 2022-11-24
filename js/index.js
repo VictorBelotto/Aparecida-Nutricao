@@ -2,37 +2,40 @@
 
 const pacientes = document.querySelectorAll(".paciente")
 
-const peso = document.querySelectorAll(".info-peso");
-
-const altura = document.querySelectorAll(".info-altura");
-
-const imc = document.querySelectorAll(".info-imc");
 
 for(let i = 0; i < pacientes.length; i++){
-    
-    const pesoCalculo = Number(peso[i].textContent)
-    const alturaCalculo = Number(altura[i].textContent)
-    
-    let pesoEhValido = pesoCalculo <= 600 && pesoCalculo > 0;
-    let alturaEhValida = alturaCalculo <= 3.50 && alturaCalculo > 0;
 
-   
+    const paciente = pacientes[i];
+
+    const tdPeso = paciente.querySelector(".info-peso");
+    const peso = tdPeso.textContent;
+
+    const tdAltura = paciente.querySelector(".info-altura");
+    const altura = tdAltura.textContent;
+
+    const tdImc = paciente.querySelector(".info-imc");
+    
+    const pesoEhValido = peso <= 600 && peso > 0;
+    const alturaEhValida = altura <= 3.50 && altura > 0;
+
+
     
     if(!pesoEhValido && !alturaEhValida){
-        imc[i].textContent = "Altura e Peso invalidos"
-        pacientes[i].classList.add("altura-peso-invalidos");
+        tdImc.textContent = "Altura e Peso invalidos"
+        paciente.classList.add("altura-peso-invalidos");
     } 
         else if(pesoEhValido === false){
-            imc[i].textContent = "Peso invalido"
-            pacientes[i].classList.add("peso-invalido");
+            tdImc.textContent = "Peso invalido"
+            paciente.classList.add("peso-invalido");
         }
             else if(alturaEhValida === false){
-                imc[i].textContent = "Altura invalida" 
-                pacientes[i].classList.add("altura-invalida");
+                tdImc.textContent = "Altura invalida" 
+                paciente.classList.add("altura-invalida");
+                
             }
                 else{
-                    calculaImc(pesoCalculo, alturaCalculo)
-                    imc[i].textContent = calculaImc(pesoCalculo, alturaCalculo)
+                    
+                    tdImc.textContent = calculaImc(peso, altura)
                 }
 }
 

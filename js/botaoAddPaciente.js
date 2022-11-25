@@ -2,26 +2,24 @@ const botaoAddPaciente = document.querySelector("#adicionar-paciente");
 
 let buscaPaciente = document.querySelector("#form-adiciona");
 
+let tabela = document.querySelector("#tabela-pacientes");
 
 botaoAddPaciente.addEventListener("click", (event) => {event.preventDefault();
 
-    let paciente = obtemPacienteDoFormulario(buscaPaciente)
-    verificaSeFormularioEhValido(paciente)
-    let pacienteTr = montaTr(paciente)
-
-
-  
+    let paciente = obtemPacienteDoFormulario(buscaPaciente);
     
-    let tabela = document.querySelector("#tabela-pacientes");
+    let pacienteTr = montaTr(paciente);
+
+    let erro = validaPaciente(paciente);
+
+    if(erro.length > 0){
+        alert("Erro")
+        return;
+    }
 
     tabela.appendChild(pacienteTr)
-    pacientes = document.querySelectorAll(".paciente")
-console.log(pacientes)
+    
     buscaPaciente.reset();
-
-    
-    
-    
 })
 
 function obtemPacienteDoFormulario(buscaPaciente){
@@ -31,7 +29,7 @@ function obtemPacienteDoFormulario(buscaPaciente){
         peso:buscaPaciente.peso.value,
         altura:buscaPaciente.altura.value,
         gordura:buscaPaciente.gordura.value,
-        imc: 0 //calculaImc(buscaPaciente.peso.value, buscaPaciente.altura.value)
+        imc: calculaImc(buscaPaciente.peso.value, buscaPaciente.altura.value)
     }
     return paciente
 }
@@ -60,29 +58,16 @@ function montaTd(dado, classe){
 
 //fazer uma validação de acordo com altura e peso
 
-function verificaSeFormularioEhValido(paciente){
-
-   /*  let nome = paciente.nome
-    let peso = paciente.peso
-    let altura = paciente.altura
-    let gordura = paciente.gordura */
-
-    //let = valoresDigitados = [nome, peso, altura, gordura];
-
-    /* console.log(paciente) */
-
-    let verificaCamposPreenchidos = (nome && peso && altura && gordura) != "";
-
-   console.log(verificaCamposPreenchidos)
-
-    for(let valoresDigitados in paciente ){
-        const valores = valoresDigitados
-        
-        console.log(`O valor digitado é: ${valores}`)
+function validaPaciente(paciente){
+    if (validaPeso(paciente.peso)) {
+        return "";
+    } else {
+        return "Peso invalido";
     }
 
-
-    return 
-
+    if(validaAltura(paciente.altura)){
+        return "";
+    }else{
+        return "Altura invalida";
     }
-
+}

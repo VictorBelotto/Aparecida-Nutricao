@@ -144,3 +144,17 @@ button[disabled=disabled], button:disabled {
 .altura-invalida{
 	background-color: rgb(250, 250, 18);
 }
+
+#mensagens-erro{
+	color: red;
+	
+}
+
+.fadeOut{
+	opacity: 0;
+    transition: 0.3s;
+}
+
+.escondePaciente{
+	display: none;
+}

@@ -7,20 +7,29 @@ let tabela = document.querySelector("#tabela-pacientes");
 botaoAddPaciente.addEventListener("click", (event) => {event.preventDefault();
 
     let paciente = obtemPacienteDoFormulario(buscaPaciente);
-    
-    let pacienteTr = montaTr(paciente);
 
-    let erro = validaPaciente(paciente);
+    adicionaPacienteNaTabela(paciente)
+    let erros = validaPaciente(paciente);
 
-    if(erro.length > 0){
-        alert("Erro")
+    if(erros.length > 0){
+        exibeMensagensErro(erros);
         return;
     }
 
-    tabela.appendChild(pacienteTr)
+    
     
     buscaPaciente.reset();
+
+    let mensagensErro = document.querySelector("#mensagens-erro");
+    mensagensErro.innerHTML = "";
 })
+
+// Montando Paciente
+
+function adicionaPacienteNaTabela(paciente){
+    let pacienteTr = montaTr(paciente);
+    tabela.appendChild(pacienteTr)
+}
 
 function obtemPacienteDoFormulario(buscaPaciente){
 
@@ -56,18 +65,47 @@ function montaTd(dado, classe){
     return td;
 }
 
-//fazer uma validação de acordo com altura e peso
+//fazer uma validação do formulario para enviar
 
 function validaPaciente(paciente){
-    if (validaPeso(paciente.peso)) {
-        return "";
-    } else {
-        return "Peso invalido";
+
+   let erros = [];
+
+   if(paciente.nome.length == 0){
+        erros.push("O nome não pode ser em branco");
+   }
+
+   if (paciente.gordura.length == 0){
+        erros.push("A gordura não pode ser em branco");
+   }
+
+    if (paciente.peso.length == 0){
+        erros.push("O peso não pode ser em branco");
     }
 
-    if(validaAltura(paciente.altura)){
-        return "";
-    }else{
-        return "Altura invalida";
+    if (paciente.altura.length == 0){
+        erros.push("A altura não pode ser em branco");
     }
+
+    if(!validaPeso(paciente.peso)){
+        erros.push("Peso inválido")
+    }
+
+    if(!validaAltura(paciente.altura)){
+        erros.push("Altura inválida")
+    }
+   return erros;
+
 }
+
+function exibeMensagensErro(erros){
+    let ul = document.querySelector("#mensagens-erro");
+    ul.innerHTML = "";
+    erros.forEach((erro) => {
+        let li = document.createElement("li");
+        li.textContent = erro;
+        ul.appendChild(li);
+    });
+
+}
+
